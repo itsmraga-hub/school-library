@@ -50,14 +50,3 @@ class Person
   # Make method is_of_age? private
   private :is_of_age?
 end
-
-p = Person.new(20, "William", false)
-puts p.age
-puts p.name
-puts p.can_use_services?
-p.age!(10)
-p.name!("John")
-puts p.age
-puts p.name
-puts p.can_use_services?
-

@@ -11,9 +11,3 @@ class Student < Person
   end
 
 end
-
-p = Student.new(20, classroom: "fgh")
-puts p
-puts p.age
-puts p.name
-puts p.play_hooky

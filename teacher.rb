@@ -10,8 +10,3 @@ class Teacher < Person
     true
   end
 end
-
-# t = Teacher.new(40, 'Physics')
-# puts t.to_json
-# puts t.name
-# puts t.can_use_services?
