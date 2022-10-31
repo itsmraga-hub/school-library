@@ -1,6 +1,6 @@
 class Person
   # Constructor with name, age, and parent_permission as parameter.
-  def initialize(age, name="unknown", parent_permission=true)
+  def initialize(age, name = 'unknown', parent_permission: true)
     # Instance vars: @id, @name, and @age.
     @id
     @age = age
@@ -9,17 +9,9 @@ class Person
   end
 
   # @id, @name and @age getter methods
-  def id
-    @id
-  end
+  attr_reader :id
 
-  def name
-    @name
-  end
-
-  def age
-    @age
-  end
+  attr_reader :name, :age
 
   # Setter methods for @name, and @parent_permission
   def name!(name)
@@ -32,19 +24,14 @@ class Person
 
   # Private method is_of_age?
   def is_of_age?
-    if @age >= 18
-      return true
-    else
-      return false
-    end
+    @age >= 18
   end
 
   # public method can_use_services?
   def can_use_services?
-    if is_of_age? || @parent_permission
-      return true
-    end
-    return false
+    return true if is_of_age? || @parent_permission
+
+    false
   end
 
   # Make method is_of_age? private
