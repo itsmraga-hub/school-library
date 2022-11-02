@@ -10,11 +10,11 @@ class BaseDecorator < Nameable
   end
 end
 
-# class CapitalizeDecorator < BaseDecorator
-#   def correct_name
-#     @nameable.name.capitalize
-#   end
-# end
+class CapitalizeDecorator < BaseDecorator
+  def correct_name
+    @nameable.name.capitalize
+  end
+end
 
 # class TrimmerDecorator < BaseDecorator
 #   def correct_name
