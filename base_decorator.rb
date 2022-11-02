@@ -1,9 +1,11 @@
-require_relative "nameable"
+require_relative 'nameable'
 
 class BaseDecorator < Nameable
+  # rubocop:disable Lint/MissingSuper
   def initialize(obj)
     @nameable = obj
   end
+  # rubocop:enable Lint/MissingSuper
 
   def correct_name
     @nameable.name
@@ -18,9 +20,8 @@ end
 
 class TrimmerDecorator < BaseDecorator
   def correct_name
-    if @nameable.correct_name.length > 10
-      return @nameable.correct_name.slice(0, 9)
-    end
+    return @nameable.correct_name.slice(0, 9) if @nameable.correct_name.length > 10
+
     @nameable.correct_name
   end
 end

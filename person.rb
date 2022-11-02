@@ -1,8 +1,9 @@
-require_relative "nameable"
-require_relative "base_decorator"
+require_relative 'nameable'
+require_relative 'base_decorator'
 
 class Person < Nameable
   # Constructor with name, age, and parent_permission as parameter.
+  # rubocop:disable Lint/MissingSuper
   def initialize(age, name = 'unknown', parent_permission: true)
     # Instance vars: @id, @name, and @age.
     @id = Random.rand(1..1000)
@@ -10,6 +11,7 @@ class Person < Nameable
     @name = name
     @parent_permission = parent_permission
   end
+  # rubocop:enable Lint/MissingSuper
 
   def correct_name
     @name
@@ -45,11 +47,11 @@ class Person < Nameable
   private :of_age?
 end
 
-person = Person.new(22, 'maximilianus')
-puts person.correct_name
+# person = Person.new(22, 'maximilianus')
+# puts person.correct_name
 
-capitalizedPerson = CapitalizeDecorator.new(person)
-puts capitalizedPerson.correct_name
+# capitalizedPerson = CapitalizeDecorator.new(person)
+# puts capitalizedPerson.correct_name
 
-capitalizedTrimmedPerson = TrimmerDecorator.new(capitalizedPerson)
-puts capitalizedTrimmedPerson.correct_name
+# capitalizedTrimmedPerson = TrimmerDecorator.new(capitalizedPerson)
+# puts capitalizedTrimmedPerson.correct_name
