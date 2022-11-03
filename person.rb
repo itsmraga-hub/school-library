@@ -2,18 +2,16 @@ require_relative 'nameable'
 require_relative 'base_decorator'
 
 class Person < Nameable
-  attr_reader :rentals
   # Constructor with name, age, and parent_permission as parameter.
-  # rubocop:disable Lint/MissingSuper
   def initialize(age, name = 'unknown', parent_permission: true)
     # Instance vars: @id, @name, and @age.
+    super()
     @id = Random.rand(1..1000)
     @age = age
     @name = name
     @parent_permission = parent_permission
     @rentals = []
   end
-  # rubocop:enable Lint/MissingSuper
 
   def add_rental(book)
     @rentals.push(book)
@@ -25,18 +23,9 @@ class Person < Nameable
   end
 
   # @id, @name and @age getter methods
-  attr_reader :id
+  attr_reader :id, :rentals
 
-  attr_reader :name, :age
-
-  # Setter methods for @name, and @parent_permission
-  def name!(name)
-    @name = name
-  end
-
-  def age!(age)
-    @age = age
-  end
+  attr_accessor :name, :age
 
   # Private method is_of_age?
   def of_age?
@@ -53,12 +42,3 @@ class Person < Nameable
   # Make method is_of_age? private
   private :of_age?
 end
-
-# person = Person.new(22, 'maximilianus')
-# puts person.correct_name
-
-# capitalizedPerson = CapitalizeDecorator.new(person)
-# puts capitalizedPerson.correct_name
-
-# capitalizedTrimmedPerson = TrimmerDecorator.new(capitalizedPerson)
-# puts capitalizedTrimmedPerson.correct_name
