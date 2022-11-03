@@ -2,6 +2,7 @@ require_relative 'nameable'
 require_relative 'base_decorator'
 
 class Person < Nameable
+  attr_reader :rentals
   # Constructor with name, age, and parent_permission as parameter.
   # rubocop:disable Lint/MissingSuper
   def initialize(age, name = 'unknown', parent_permission: true)
@@ -10,8 +11,14 @@ class Person < Nameable
     @age = age
     @name = name
     @parent_permission = parent_permission
+    @rentals = []
   end
   # rubocop:enable Lint/MissingSuper
+
+  def add_rental(book)
+    @rentals.push(book)
+    book.person = self
+  end
 
   def correct_name
     @name
