@@ -1,11 +1,14 @@
-require_relative 'nameable'
-require_relative 'base_decorator'
+require_relative './nameable'
+require_relative './base_decorator'
+require './rental'
 
 class Person < Nameable
+  attr_reader :id, :rentals, :parent_permission
+  attr_accessor :name, :age
+
   # Constructor with name, age, and parent_permission as parameter.
   def initialize(age, name = 'unknown', parent_permission: true)
-    # Instance vars: @id, @name, and @age.
-    super()
+    # super()
     @id = Random.rand(1..1000)
     @age = age
     @name = name
@@ -13,19 +16,13 @@ class Person < Nameable
     @rentals = []
   end
 
-  def add_rental(book)
-    @rentals.push(book)
-    book.person = self
+  def add_rental(book, date)
+    Rental.new(date, book, self)
   end
 
   def correct_name
     @name
   end
-
-  # @id, @name and @age getter methods
-  attr_reader :id, :rentals
-
-  attr_accessor :name, :age
 
   # Private method is_of_age?
   def of_age?
@@ -42,3 +39,6 @@ class Person < Nameable
   # Make method is_of_age? private
   private :of_age?
 end
+
+p = Person.new(10, 'William')
+puts p
