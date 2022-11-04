@@ -49,8 +49,6 @@ end
 
 
 def main
-  # app = App.new()
-  # app.run()
   start_program
 end
 

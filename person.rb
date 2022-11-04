@@ -39,6 +39,3 @@ class Person < Nameable
   # Make method is_of_age? private
   private :of_age?
 end
-
-p = Person.new(10, 'William')
-puts p

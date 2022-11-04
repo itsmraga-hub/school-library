@@ -17,6 +17,3 @@ class Student < Person
     '¯(ツ)/¯'
   end
 end
-
-st = Student.new(10, 'William', true, 'class 1')
-puts st
