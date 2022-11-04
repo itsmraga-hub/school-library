@@ -1,6 +1,6 @@
 require_relative './app'
 
-@app = App.new()
+@app = App.new
 
 def list_options
   puts '
@@ -20,7 +20,7 @@ def start_program
     list_options
     choice = gets.chomp.to_i
     if choice.between?(1, 7)
-      if choice === 7
+      if choice == 7
         puts 'Thank you for using this app!'
         exit
       else
@@ -47,9 +47,8 @@ def choose_operation(opt)
   end
 end
 
-
 def main
   start_program
 end
 
-main()
+main

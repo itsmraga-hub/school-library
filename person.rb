@@ -6,15 +6,15 @@ class Person < Nameable
   attr_reader :id, :rentals, :parent_permission
   attr_accessor :name, :age
 
-  # Constructor with name, age, and parent_permission as parameter.
+  # rubocop:disable Lint/MissingSuper
   def initialize(age, name = 'unknown', parent_permission: true)
-    # super()
     @id = Random.rand(1..1000)
     @age = age
     @name = name
     @parent_permission = parent_permission
     @rentals = []
   end
+  # rubocop:enable Lint/MissingSuper
 
   def add_rental(book, date)
     Rental.new(date, book, self)
