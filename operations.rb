@@ -36,7 +36,6 @@ class Operations
   def choose_operation(opt)
     case opt
     when 1
-      # binding.pry
       @app.list_books
     when 2
       @app.list_peoples
