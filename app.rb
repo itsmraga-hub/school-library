@@ -56,8 +56,8 @@ class App
     age = gets.chomp
     print 'Teacher\'s specialization: '
     specialization = gets.chomp
-    @peoples.push(Teacher.new(age, specialization, name))
-    puts 'Teacher crated successfully!'
+    @peoples.push(Teacher.new(age, name, specialization))
+    puts 'Teacher created successfully!'
   end
 
   def create_person
@@ -83,11 +83,13 @@ class App
   end
 
   def create_rental
-    puts 'Select a book from the following list by number'
+    puts 'Select a book from the following list by number:'
     list_books
+    puts 'Book\'s ID: '
     bk_choice = gets.chomp.to_i
-    puts 'Select a person from the following list by number (not id)'
+    puts 'Select a person from the following list by ID:'
     list_peoples
+    puts 'Person\s ID: '
     p_choice = gets.chomp.to_i
     print 'Enter today\'s date: '
     date = gets.chomp
