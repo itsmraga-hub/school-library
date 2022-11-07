@@ -1,7 +1,4 @@
 require_relative './app'
-# require 'pry'
-
-# @app = App.new
 
 class Operations
   def initialize
