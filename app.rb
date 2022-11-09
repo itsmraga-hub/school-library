@@ -135,12 +135,12 @@ class App
 
     person = list_peoples.select { |p| p['id'] == id }
 
-    if !person[0].empty?
-      puts "#{person[0]['name']}'s rented books: \n"
-      rentals_list.each_with_index do |rental, _i| \
-        if rental['person']['id'] == id
-          puts "Date: #{rental['date']}, Book: #{rental['book']['title']} by #{rental['book']['author']}"
-        end
+    return unless person[0]
+
+    puts "#{person[0]['name']}'s rented books: \n"
+    rentals_list.each_with_index do |rental, _i| \
+      if rental['person']['id'] == id
+        puts "Date: #{rental['date']}, Book: #{rental['book']['title']} by #{rental['book']['author']}"
       end
     end
   end
