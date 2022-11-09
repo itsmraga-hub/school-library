@@ -36,6 +36,12 @@ class Person < Nameable
     false
   end
 
+  def to_hash
+    hash = {}
+    instance_variables.each { |var| hash[var.to_s.delete('@')] = instance_variable_get(var) }
+    hash
+  end
+
   # Make method is_of_age? private
   private :of_age?
 end
