@@ -1,0 +1,15 @@
+[
+  {
+    "date": "2022",
+    "book": {
+      "title": "The Notebook",
+      "author": "Nicholas Sparks"
+    },
+    "person": {
+      "id": 841,
+      "name": "Daisy Chepkirui",
+      "age": 841,
+      "class": "Teacher"
+    }
+  }
+]
