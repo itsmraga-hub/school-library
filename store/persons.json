@@ -1,0 +1,20 @@
+[
+  {
+    "name": "William Raga",
+    "id": 877,
+    "age": 877,
+    "class": "Student"
+  },
+  {
+    "name": "Daisy Chepkirui",
+    "id": 841,
+    "age": 841,
+    "class": "Teacher"
+  },
+  {
+    "name": "John Kamau",
+    "id": 189,
+    "age": 30,
+    "class": "Student"
+  }
+]

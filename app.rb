@@ -4,6 +4,9 @@ require './book'
 require './rental'
 require './classroom'
 require './person'
+require './file_operations'
+require 'json'
+require 'pry'
 
 class App
   attr_accessor :books, :students, :teachers, :rentals
@@ -12,17 +15,22 @@ class App
     @books = []
     @peoples = []
     @rentals = []
+    @persist_people = Persist.new('store/persons.json')
+    @persist_books = Persist.new('store/books.json')
+    @persist_rentals = Persist.new('store/rentals.json')
   end
 
   def list_books
-    @books.each_with_index do |bk, i|
-      puts "#{i}) Title: #{bk.title}, Author: #{bk.author}"
+    books_list = @persist_books.load
+    books_list.each_with_index do |bk, i|
+      puts "Book#{i + 1}] Title: #{bk['title']}\n   Author: #{bk['author']}\n   Book ID: #{i}"
     end
   end
 
   def list_peoples
-    @peoples.each_with_index do |p, i|
-      puts "#{i}) [#{p.class}] Name: #{p.name}, ID: #{p.id}"
+    peoples_list = @persist_people.load
+    peoples_list.each_with_index do |p, i|
+      puts "#{i + 1}] [#{p['class']}] Name: #{p['name']}\n\t     Person ID: #{p['id']}"
     end
   end
 
@@ -71,6 +79,13 @@ class App
     else
       puts 'INVALID NUMBER!!'
     end
+    persons_list = @persist_people.load
+    @peoples.each do |person|
+      persons_list << {
+        name: person.name, id: person.id, age: person.age, class: person.class
+      }
+    end
+    @persist_people.save(persons_list)
   end
 
   def create_book
@@ -80,6 +95,13 @@ class App
     author = gets.chomp
     @books.push(Book.new(title, author))
     puts 'Book created successfully!'
+    books_list = @persist_books.load
+    @books.each do |book|
+      books_list << {
+        title: book.title, author: book.author
+      }
+    end
+    @persist_books.save(books_list)
   end
 
   def create_rental
@@ -93,16 +115,33 @@ class App
     p_choice = gets.chomp.to_i
     print 'Enter today\'s date: '
     date = gets.chomp
-    @rentals.push(Rental.new(date, @books[bk_choice], @peoples[p_choice]))
+    book_lender = @persist_people.load.select { |p| p['id'] == p_choice }
+    @rentals.push(Rental.new(date, @persist_books.load[bk_choice], book_lender[0]))
+    rentals_list = @persist_rentals.load
+    @rentals.each do |rental|
+      rentals_list << { date: rental.date, book: { title: rental.book['title'], author: rental.book['author'] },
+                        person: { id: rental.person['id'], name: rental.person['name'], age: rental.person['age'],
+                                  class: rental.person['class'] } }
+    end
+    @persist_rentals.save(rentals_list)
     puts 'Rental added successfully'
   end
 
   def list_rentals
+    rentals_list = @persist_rentals.load
     list_peoples
     print 'Id of person: '
     id = gets.chomp.to_i
-    @rentals.each_with_index do |rental, _i| \
-      puts "Date: #{rental.date}, Book: #{rental.book.title} by #{rental.book.author}" if rental.person.id == id
+
+    person = list_peoples.select { |p| p['id'] == id }
+
+    return unless person[0]
+
+    puts "#{person[0]['name']}'s rented books: \n"
+    rentals_list.each_with_index do |rental, _i| \
+      if rental['person']['id'] == id
+        puts "Date: #{rental['date']}, Book: #{rental['book']['title']} by #{rental['book']['author']}"
+      end
     end
   end
 end
